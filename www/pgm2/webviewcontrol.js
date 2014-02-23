@@ -624,8 +624,7 @@ wvcApp = {
 var fhemWVC = {
 	httpRequest: null,
 	currResponseLine: 0,
-	appId: null,
-	defaultAppId: 12345,
+	appId: 12345,
 	debug: false,
 
 	deviceState: {
@@ -857,9 +856,10 @@ var fhemWVC = {
 //fhemWVC.injectRemoteDebugger();
 fhemWVC.initialize();
 
-// uncomment this for testing without the device
 /*
+// uncomment this for testing without the device
 document.addEventListener("DOMContentLoaded", function() {
+	fhemWVC.appId = '00001234';		// Set alternative appId here
 	fhemWVC.createIcons();
 	fhemWVC.reconnect(50);
 	fhemWVC.debug = true;
