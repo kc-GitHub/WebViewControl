@@ -1,15 +1,18 @@
-2012-08-24 Dirk
+0.1 (2012-08-24)
 	* [APP,MOD,JS,CSS] First public version
 
-2013-01-29 Dirk
+0.2, 0.3 (2013-01-29)
 	* [APP,MOD,JS] add audio playback from network or local storage
 	* [APP,MOD,JS] add text to speech
-	* [APP,MOD,JS] add volume controll
+	* [APP,MOD,JS] add volume control
 
-2013-02-11 Dirk
+0.4 (2013-02-11)
 	* [APP,MOD,JS,CSS] add voice recognition
 	* [APP] Add setting for scaling and zoom
 	* [JS] fixed bug: APP ID has not been evaluated
+	* [APP] Add Fullscreen Setting
+	* [APP] Fixed Bug: setDisplayZoomControls available in API Level > 10. Thaks to Guido (2013-02-14)		
+	* [JS] Add Error Handler shows message if no voice recognition available 		
 
 ========================================================================================================================
 Bugs, TODOs
@@ -19,9 +22,11 @@ Legende:
 - offen
 * in Analyse / Entwicklung
 
-known Bugs:
-===========
-- Listening for voice recognition can not stopped by app or fro external
+known Limitations:
+=========================
+- Speech recognising works only if Google Speech Search installed on Device
+  found here: (https://play.google.com/store/apps/details?id=com.google.android.voicesearch)
+- Listening for voice recognition can not stopped by app or from external
 - Die Kommunikation mit der APP ist erst möglich wenn ALLE Elemente der Webseite geladen sind.
   Vor allem bei der Einbindungn langsam ladender Ressourcen, Bilder usw. kann das zu einer erheblichen
   Verzögerung führen.
@@ -33,25 +38,9 @@ Wünsche / ToDo's:
 - Doku
 - API Doku (JS)
 
-* Floorplan Patch UliM zukommen lassen
-* Scaling + zoom (für Floorplan) (einstellbar per Settings)
-* Notifikation per Vibrate
-* Widget / Shortcut integration (z.B. um verschiedene Konfigurationen per Shortcut aufzurufen)
-* motionJpeg View z.B. für Webcams
 
+- APP Cacheing
+- Settings ohne neustart anwenden.
 - Konfiguration der APP-Einstellungen über JS / FHEM (VoiceRecognition Settings, TTS Settings, usw.)
-- Settings für Fullscreen usw.
-- Overlay trigger (z.B. zum Anzeigen von Anrufern oder so)
-- Keepalive
-- Command-Queue (Befehle an die APP werden gespeichert bis diese wieder verfügbar ist
-- Command response (gesendete Befehle an die APP bestätigen)
-- Kontinuierliche Spracherkennung mit konfigurierbaren Schlüsselwort, incl. Abbechen der Spracherkennung
-- Auswertung von Accelerometer, Kompass ggf. GPS usw.
-- GPS / location based Service
-- Wakeup device (Bildschirm gezielt einschalten) (weiss noch nicht wie)
-- Standby / Hintergrund Service?
-- ggf. Interaktion mit der Gerätekamera
-- ggf. Optionale Kommunikation über Google Cloud Messaging (Push-Nachrichten)
-- SMS / Anruf- Erkennung (wunsch von Martin Thomas Schrott) (wozu?)
-- Gestenerkennung / ggf. zusammen mit Kinect
-- Android 4 Design
+- Netztwerkausfälle, Loading-Fehler bei verhandenem DOM als Overlay anzeigen. (CSS oder Nativ)
+- Keepalive ?

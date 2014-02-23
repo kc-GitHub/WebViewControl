@@ -10,8 +10,12 @@
 ################################################################################
 
 package main;
+
 use strict;
 use warnings;
+
+use vars qw {%data %modules $FW_RET}; #supress errors in Eclipse EPIC
+
 
 #########################
 # Forward declaration
@@ -283,3 +287,17 @@ sub webViewControl_Cgi() {
 }
 
 1;
+
+=pod
+=begin html
+
+<a name="WebViewControl"></a>
+<h3>WebViewControl</h3>
+<ul>
+	WebViewCountrol ist the interface for the android APP WebviewControl
+  <br><br>
+
+</ul>
+
+=end html
+=cut
