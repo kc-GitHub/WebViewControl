@@ -16,6 +16,9 @@ use warnings;
 
 use vars qw {%data %modules $FW_RET}; #supress errors in Eclipse EPIC
 
+use constant {
+	webViewControl_Version => '0.5_alpha',
+};
 
 #########################
 # Forward declaration
@@ -91,6 +94,9 @@ sub webViewControl_Define($$) {
 	$modules{webViewControl}{defptr}{$name} = $hash;									  
 
 	webViewControl_modifyJsInclude();
+
+	$hash->{VERSION} = webViewControl_Version;
+
 	return undef;
 }
 
