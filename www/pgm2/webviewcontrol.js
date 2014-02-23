@@ -339,10 +339,10 @@ var deviceControl = {
 		}
 	},
 
-    /**
-     *
-     * @param level
-     */
+	/**
+	 *
+	 * @param level
+	 */
 	screenBrightness: function(level) {
 		deviceControl.exec('setScreenBrightness', [level]);
 	},
@@ -378,7 +378,10 @@ var deviceControl = {
 
 	voiceRec: function(opt) {
 		fhemWVC.startVoiceRecognition();
-//		deviceControl.toastMessage('voiceRec: ' + opt)
+	},
+
+	newUrl: function(opt) {
+		location.href = decodeURIComponent(opt);
 	}
 };
 
@@ -641,7 +644,7 @@ var fhemWVC = {
 		}
 
 		if(httpRequest.readyState != 3) {
-	    	return;
+			return;
 		}
 
 		var lines = httpRequest.responseText.split("\n");

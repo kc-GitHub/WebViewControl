@@ -11,8 +11,11 @@
 
 package main;
 
+use Data::Dumper;    # for debugging only
+
 use strict;
 use warnings;
+use URI::Escape;
 
 use vars qw {%data %modules $FW_RET}; #supress errors in Eclipse EPIC
 
@@ -44,6 +47,7 @@ my %sets = (
 	'audioStop'			=> 'audioStop',
 	'ttsSay'			=> 'ttsSay',
 	'voiceRec'			=> 'voiceRec',
+	'newUrl'			=> 'newUrl',	
 );
 	
 my %gets = (
@@ -117,9 +121,11 @@ sub webViewControl_modifyJsInclude() {
 	}
 
 	my $vars = 'var wvcDevices = {' . join(', ', @appsArray) . '}';
+	my $userJs = '';
 	
 	$data{FWEXT}{$fhemUrl}{SCRIPT} = 'cordova-2.3.0.js"></script>' .
 									 '<script type="text/javascript" src="/fhem/js/webviewcontrol.js"></script>' .
+									 $userJs .
 									 '<script type="text/javascript">' . $vars . '</script>' .
 									 '<script type="text/javascript" charset="UTF-8';
 }
@@ -142,36 +148,47 @@ sub webViewControl_Set($@) {
 		return 'Please specify one of following set value: ' . $setArgs;
 	}
 
-	if (! (($sets{$a[0]} eq 'reload') || ($sets{$a[0]} eq 'audioStop')) ) {
-		if ($sets{$a[0]} eq 'toastMessage' && (int(@a)) < 2) {
+	my $cmd = $a[0];
+
+	if (! (($sets{$cmd} eq 'reload') || ($sets{$cmd} eq 'audioStop')) ) {
+		if ($sets{$cmd} eq 'toastMessage' && (int(@a)) < 2) {
 			return 'Please input a text for toastMessage';
 
-		} elsif ($sets{$a[0]} eq 'keepScreenOn') {
+		} elsif ($sets{$cmd} eq 'keepScreenOn') {
 			if ($a[1] ne 'on' && $a[1] ne 'off') {
 				return 'keepScreenOn needs on of off';
 			} else {
 				$a[1] = ($a[1] eq 'on') ? 'true' : 'false'; 
 			}
 			
-		} elsif ($sets{$a[0]} eq 'screenBrightness' && (int($a[1]) < 1 || int($a[1]) > 255)) {
+		} elsif ($sets{$cmd} eq 'screenBrightness' && (int($a[1]) < 1 || int($a[1]) > 255)) {
 			return 'screenBrightness needs value from 1 to 255';
 
-		} elsif ($sets{$a[0]} eq 'volume' && (int($a[1]) < 0 || int($a[1]) > 15)) {
+		} elsif ($sets{$cmd} eq 'volume' && (int($a[1]) < 0 || int($a[1]) > 15)) {
 			return 'volume needs value from 0 to 15';
 
-		} elsif ($sets{$a[0]} eq 'audioPlay' && (int(@a)) < 2 ) {
+		} elsif ($sets{$cmd} eq 'audioPlay' && (int(@a)) < 2 ) {
 			return 'Please input a url where Audio to play.';
 
-		} elsif ($sets{$a[0]} eq 'ttsSay' && (int(@a)) < 2 ) {
+		} elsif ($sets{$cmd} eq 'ttsSay' && (int(@a)) < 2 ) {
 			return 'Please input a text to say.';
 
-		} elsif ($sets{$a[0]} eq 'voiceRec' && ($a[1] ne 'start' && $a[1] ne 'stop')) {
+		} elsif ($sets{$cmd} eq 'voiceRec' && ($a[1] ne 'start' && $a[1] ne 'stop')) {
 			return 'voiceRec must set to start or stop';
+
+		} elsif ($sets{$cmd} eq 'newUrl') {
+			if ((int(@a)) < 2 ) {
+				return 'Please input a url.';
+			} else {
+				shift(@a);
+				my $v = uri_escape(join(' ', @a));
+				@a = ($cmd, $v);
+			}
 		}
 	}
 	
 	my $v = join(' ', @a);
-
+ 
 	$hash->{CHANGED}[0] = $v;
 	$hash->{STATE} = $v;
 	$hash->{lastCmd} = $v;
