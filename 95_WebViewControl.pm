@@ -36,11 +36,14 @@ my %sets = (
 	'audioPlay'			=> 'audioPlay',
 	'audioStop'			=> 'audioStop',
 	'ttsSay'			=> 'ttsSay',
+	'voiceRec'			=> 'voiceRec',
 );
 	
 my %gets = (
-	'powerLevel'		=> 1,
-	'powerPlugged'		=> 1,
+	'powerLevel'				=> 1,
+	'powerPlugged'				=> 1,
+	'voiceRecognitionLastError'	=> 1,
+	'voiceRecognitionLastResult'=> 1,
 );
 
 my $FW_encoding="UTF-8";		 # like in FHEMWEB: encoding hardcoded
@@ -105,9 +108,10 @@ sub webViewControl_modifyJsInclude() {
 
 	my $vars = 'var wvcDevices = {' . join(', ', @appsArray) . '}';
 	
-	$data{FWEXT}{$fhemUrl}{SCRIPT} = 'webviewcontrol.js"></script><script type="text/javascript">' .
-									  $vars .
-									  '</script><script type="text/javascript" charset="UTF-8';
+	$data{FWEXT}{$fhemUrl}{SCRIPT} = 'cordova-2.3.0.js"></script>' .
+									 '<script type="text/javascript" src="/fhem/js/webviewcontrol.js"></script>' .
+									 '<script type="text/javascript">' . $vars . '</script>' .
+									 '<script type="text/javascript" charset="UTF-8';
 }
 
 ###################################
@@ -117,9 +121,10 @@ sub webViewControl_Set($@) {
  	my $name = shift @a;
 
 	if (int(@a) == 1 && $a[0] eq '?') {
-		$sets{screenBrightness}.=':slider,1,1,255';
-		$sets{volume}.=':slider,0,1,15';
-		my $setArgs = join(' ', sort values %sets);
+		my %localSets = %sets;
+		$localSets{screenBrightness}.=':slider,1,1,255';
+		$localSets{volume}.=':slider,0,1,15';
+		my $setArgs = join(' ', sort values %localSets);
 		return $setArgs;	
 	}
 
@@ -149,6 +154,9 @@ sub webViewControl_Set($@) {
 
 		} elsif ($sets{$a[0]} eq 'ttsSay' && (int(@a)) < 2 ) {
 			return 'Please input a text to say.';
+
+		} elsif ($sets{$a[0]} eq 'voiceRec' && ($a[1] ne 'start' && $a[1] ne 'stop')) {
+			return 'voiceRec must set to start or stop';
 		}
 	}
 	
@@ -190,8 +198,8 @@ sub webViewControl_Set2($@) {
 	$hash->{READINGS}{state}{TIME} = TimeNow();
 	$hash->{READINGS}{state}{VAL} = $v;
    
-#       Log 1, $t;                         
-#return $t;                                  
+#       Log 1, $t;
+#return $t;
 	return undef;
 }
 
@@ -247,19 +255,25 @@ sub webViewControl_Cgi() {
 			if ($p eq 'id') {
 				$name = $v;
 			} else {
-				$readings{r}{$p}{TIME} = $timeNow;
-				$readings{r}{$p}{VAL} = $v;
+				$readings{$p}{TIME} = $timeNow;
+				$readings{$p}{VAL} = $v;
 				push(@states, $p . '=' . $v);
 			}
 		}
 
 		if ($modules{webViewControl}{defptr}{$name}) {
 			my $state = join(', ', @states);
-			$modules{webViewControl}{defptr}{$name}->{CHANGED}[0] = $state;
+#			$modules{webViewControl}{defptr}{$name}->{CHANGED}[0] = $state;
 			$modules{webViewControl}{defptr}{$name}->{STATE} = $state;
-			$modules{webViewControl}{defptr}{$name}->{READINGS} = $readings{r};
 			$modules{webViewControl}{defptr}{$name}->{READINGS}{state}{VAL} = $state;
 			$modules{webViewControl}{defptr}{$name}->{READINGS}{state}{TIME} = $timeNow;
+
+			my $cc = 0;
+			foreach my $reading (keys %readings) {
+				$modules{webViewControl}{defptr}{$name}->{CHANGED}[$cc] = $reading . ': ' . $readings{$reading}{VAL};
+				$modules{webViewControl}{defptr}{$name}->{READINGS}{$reading} = $readings{$reading};
+				$cc++;
+			}
 
 			DoTrigger($name, undef);
 		}
