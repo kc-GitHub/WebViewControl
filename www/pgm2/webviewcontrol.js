@@ -340,25 +340,40 @@ var deviceControl = {
 	},
 
 	/**
-	 *
+	 * Set screen brightness
 	 * @param level
 	 */
 	screenBrightness: function(level) {
 		deviceControl.exec('setScreenBrightness', [level]);
 	},
 
+	/**
+	 * Set volume
+	 * @param level
+	 */
 	volume: function(level) {
 		deviceControl.exec('setVolume', [level]);
 	},
-	
+
+	/**
+	 * Set keep screen on / off
+	 * @param value
+	 */
 	keepScreenOn: function(value) {
 		deviceControl.exec('setKeepScreenOn', [value]);
 	},
 
+	/**
+	 * Set Toast Message
+	 * @param message
+	 */
 	toastMessage: function(message) {
 		deviceControl.exec('showToast', [message]);
 	},
-	
+
+	/**
+	 * Perform a reload
+	 */
 	reload: function() {
 		window.location.reload();		
 	},

@@ -48,6 +48,7 @@ my %sets = (
 	'ttsSay'			=> 'ttsSay',
 	'voiceRec'			=> 'voiceRec',
 	'newUrl'			=> 'newUrl',	
+	'reload'			=> 'reload',	
 );
 	
 my %gets = (
