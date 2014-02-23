@@ -118,7 +118,7 @@ sub webViewControl_Undef($$) {
 sub webViewControl_modifyJsInclude() {
 	my @appsArray;
 	foreach my $appName (keys %{ $modules{webViewControl}{defptr} } ) {
-		push(@appsArray, $modules{webViewControl}{defptr}{$appName}->{appID} . ': \'' . $appName . '\'');
+		push(@appsArray, '\'' . $modules{webViewControl}{defptr}{$appName}->{appID} . '\': \'' . $appName . '\'');
 	}
 
 	my $vars = 'var wvcDevices = {' . join(', ', @appsArray) . '}';
@@ -189,7 +189,6 @@ sub webViewControl_Set($@) {
 	}
 	
 	my $v = join(' ', @a);
- 
 	$hash->{CHANGED}[0] = $v;
 	$hash->{STATE} = $v;
 	$hash->{lastCmd} = $v;
@@ -198,43 +197,6 @@ sub webViewControl_Set($@) {
    
 	return undef;
 }
-
-###################################
-sub webViewControl_Set2($@) {
-	my ($hash, @a) = @_;
- 	my $name = shift @a;
-
-	my $setArgs = join(' ', sort keys %sets);
-
-	if (int(@a) < 1) {
-		return 'Please specify one of following set value: ' . $setArgs;
-	}
-	
-	if (int(@a) == 1 && $a[0] eq '?') {
-		return $setArgs;	
-	}
-
-	if (int(@a) < 2) {
-		return 'Unknown argument for ' . $a[0];
-	}
-
-	my $v = join(" ", @a);
-#  Log GetLogLevel($name,2), "dummy set $name $v";
-
-	$hash->{CHANGED}[0] = $v;
-	$hash->{STATE} = $v;
-	$hash->{READINGS}{state}{TIME} = TimeNow();
-	$hash->{READINGS}{state}{VAL} = $v;
-   
-#       Log 1, $t;
-#return $t;
-	return undef;
-}
-
-
-
-
-
 
 sub webViewControl_Get($@) {
 	my ($hash, @a) = @_;
