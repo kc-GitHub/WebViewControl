@@ -1,0 +1,79 @@
+* {
+	-webkit-touch-callout:			none;			/* prevent callout to copy image, etc when tap to hold */
+	-webkit-text-size-adjust:		none;			/* prevent webkit from resizing text to fit */
+	-webkit-tap-highlight-color:	rgba(0,0,0,0);	/* make transparent link selection, adjust last value opacity 0 to 1.0 */
+	-webkit-user-select:			none;			/* prevent copy paste, to allow, change 'none' to 'text' */
+}
+
+.batteryIconWrapper .batteryIcon {
+	display: block;
+	background: transparent url('../icons/batteryIconSprite.png') no-repeat;
+	height: 32px;
+	width: 18px;
+	position: relative;
+}
+
+.batteryIconWrapper .txtPercent {
+	padding-top: 32px;
+	margin-left: -2px;
+	font-family: sans-serif;
+	color: #999999;
+	width: 25px;
+	text-align: center;
+	font-size: 10px;
+}
+
+.batteryIconWrapper .bat10green { background-position: 0px 0; width: 18px; height: 32px}
+.batteryIconWrapper .bat20green { background-position: -20px 0; width: 18px; height: 32px}
+.batteryIconWrapper .bat30green { background-position: -40px 0; width: 18px; height: 32px}
+.batteryIconWrapper .bat40green { background-position: -60px 0; width: 18px; height: 32px}
+.batteryIconWrapper .bat50green { background-position: -80px 0; width: 18px; height: 32px}
+.batteryIconWrapper .bat60green { background-position: -100px 0; width: 18px; height: 32px}
+.batteryIconWrapper .bat70green { background-position: -120px 0; width: 18px; height: 32px}
+.batteryIconWrapper .bat80green { background-position: -139px 0; width: 18px; height: 32px}
+.batteryIconWrapper .bat90green { background-position: -159px 0; width: 18px; height: 32px}
+.batteryIconWrapper .bat100green { background-position: -179px 0; width: 18px; height: 32px}
+.batteryIconWrapper .bat10yellow { background-position: 0 -33px; width: 18px; height: 32px}
+.batteryIconWrapper .bat20yellow { background-position: -20px -33px; width: 18px; height: 32px}
+.batteryIconWrapper .bat30yellow { background-position: -40px -33px; width: 18px; height: 32px}
+.batteryIconWrapper .bat40yellow { background-position: -60px -33px; width: 18px; height: 32px}
+.batteryIconWrapper .bat50yellow { background-position: -80px -33px; width: 18px; height: 32px}
+.batteryIconWrapper .bat60yellow { background-position: -100px -33px; width: 18px; height: 32px}
+.batteryIconWrapper .bat70yellow { background-position: -120px -33px; width: 18px; height: 32px}
+.batteryIconWrapper .bat80yellow { background-position: -139px -33px; width: 18px; height: 32px}
+.batteryIconWrapper .bat90yellow { background-position: -159px -33px; width: 18px; height: 32px}
+.batteryIconWrapper .bat100yellow { background-position: -179px -33px; width: 18px; height: 32px}
+.batteryIconWrapper .bat10red { background-position: 0 -65px; width: 18px; height: 32px}
+.batteryIconWrapper .bat20red { background-position: -20px -65px; width: 18px; height: 32px}
+.batteryIconWrapper .bat30red { background-position: -40px -65px; width: 18px; height: 32px}
+.batteryIconWrapper .bat40red { background-position: -60px -65px; width: 18px; height: 32px}
+.batteryIconWrapper .bat50red { background-position: -80px -65px; width: 18px; height: 32px}
+.batteryIconWrapper .bat60red { background-position: -100px -65px; width: 18px; height: 32px}
+.batteryIconWrapper .bat70red { background-position: -120px -65px; width: 18px; height: 32px}
+.batteryIconWrapper .bat80red { background-position: -139px -65px; width: 18px; height: 32px}
+.batteryIconWrapper .bat90red { background-position: -159px -65px; width: 18px; height: 32px}
+.batteryIconWrapper .bat100red { background-position: -179px -65px; width: 18px; height: 32px}
+.batteryIconWrapper .bat0 { background-position: 0 -98px; width: 18px; height: 32px}
+
+.batteryIconWrapper .acConnected {
+	background: transparent url('../icons/batteryIconSprite.png') no-repeat;
+	background-position: -20px -98px;
+	position: absolute;
+	height: 31px;
+	width: 22px;
+	top: -2px;
+	left: 11px;
+}
+
+.onlineIconWrapper .onlineIcon {
+	display: block;
+	background: transparent url('../icons/onlineIconSprite.png') no-repeat;
+	background-position: -19px 0;
+	height: 18px;
+	width: 18px;
+	position: relative;
+	margin-bottom: 10px;
+}
+
+.onlineIconWrapper .online { background-position: 0px 0; width: 18px; height: 18px}
+.onlineIconWrapper .offline { background-position: -19px 0; width: 18px; height: 18px}
