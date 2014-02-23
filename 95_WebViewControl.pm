@@ -29,11 +29,15 @@ my $fhemUrl = '/webviewcontrol' ;
 
 my %sets = (
 	'screenBrightness'	=> 'screenBrightness', # slider,1,1,100',
+	'volume'			=> 'volume', # slider,1,1,100',	
 	'keepScreenOn'		=> 'keepScreenOn',
 	'toastMessage'		=> 'toastMessage',
 	'reload'			=> 'reload',
+	'audioPlay'			=> 'audioPlay',
+	'audioStop'			=> 'audioStop',
+	'ttsSay'			=> 'ttsSay',
 );
-
+	
 my %gets = (
 	'powerLevel'		=> 1,
 	'powerPlugged'		=> 1,
@@ -114,16 +118,16 @@ sub webViewControl_Set($@) {
 
 	if (int(@a) == 1 && $a[0] eq '?') {
 		$sets{screenBrightness}.=':slider,1,1,255';
+		$sets{volume}.=':slider,0,1,15';
 		my $setArgs = join(' ', sort values %sets);
 		return $setArgs;	
 	}
 
-	if (int(@a) < 1) {
+	if ((int(@a) < 1) || (!defined $sets{$a[0]}) ) {
 		return 'Please specify one of following set value: ' . $setArgs;
 	}
-	
-	
-	if (!($sets{$a[0]} eq 'reload')) {
+
+	if (! (($sets{$a[0]} eq 'reload') || ($sets{$a[0]} eq 'audioStop')) ) {
 		if ($sets{$a[0]} eq 'toastMessage' && (int(@a)) < 2) {
 			return 'Please input a text for toastMessage';
 
@@ -135,7 +139,16 @@ sub webViewControl_Set($@) {
 			}
 			
 		} elsif ($sets{$a[0]} eq 'screenBrightness' && (int($a[1]) < 1 || int($a[1]) > 255)) {
-			return 'screenBrightness needs value from 1 to 100';
+			return 'screenBrightness needs value from 1 to 255';
+
+		} elsif ($sets{$a[0]} eq 'volume' && (int($a[1]) < 0 || int($a[1]) > 15)) {
+			return 'volume needs value from 0 to 15';
+
+		} elsif ($sets{$a[0]} eq 'audioPlay' && (int(@a)) < 2 ) {
+			return 'Please input a url where Audio to play.';
+
+		} elsif ($sets{$a[0]} eq 'ttsSay' && (int(@a)) < 2 ) {
+			return 'Please input a text to say.';
 		}
 	}
 	
