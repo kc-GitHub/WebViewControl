@@ -2,9 +2,9 @@
  * TTS Phonegap Plugin *
  ***********************/
 function TTS() {
-	var STOPPED			= 0;
-	var INITIALIZING	= 1;
-	var STARTED			= 2;
+//	var STOPPED			= 0;
+//	var INITIALIZING	= 1;
+//	var STARTED			= 2;
 
 	/**
 	 * Play the passed in text as synthesized speech
@@ -41,9 +41,10 @@ function TTS() {
 	/**
 	 * Play silence for the number of ms passed in as duration
 	 *
-	 * @param	{Long}	duration
-	 * @param	{Object}	successCallback
-	 * @param	{Object}	errorCallback
+	 * @param   {number} duration
+	 * @param   {object} successCallback
+	 * @param   {object} errorCallback
+	 * @returns {*}
 	 */
 	this.silence = function(duration, successCallback, errorCallback) {
 		return cordova.exec(successCallback, errorCallback, "TTS", "silence", [duration]);
@@ -52,9 +53,10 @@ function TTS() {
 	/**
 	 * Set speed of speech.  Usable from 30 to 500.  Higher values make little difference.
 	 *
-	 * @param	{Long}		speed
-	 * @param	{Object}	successCallback
-	 * @param	{Object}	errorCallback
+	 * @param   {number} speed
+	 * @param   {Object} successCallback
+	 * @param   {Object} errorCallback
+	 * @returns {*}
 	 */
 	this.speed = function(speed, successCallback, errorCallback) {
 		return cordova.exec(successCallback, errorCallback, "TTS", "speed", [speed]);
@@ -63,7 +65,7 @@ function TTS() {
 	/**
 	 * Set pitch of speech.  Useful values are approximately 30 - 300
 	 *
-	 * @param	{Long}		pitch
+	 * @param	{number}		pitch
 	 * @param	{Object}	successCallback
 	 * @param	{Object}	errorCallback
 	 */
@@ -375,7 +377,7 @@ var deviceControl = {
 	},
 
 	voiceRec: function(opt) {
-		fhemWVC.startVoiceRecodnition();
+		fhemWVC.startVoiceRecognition();
 //		deviceControl.toastMessage('voiceRec: ' + opt)
 	}
 };
@@ -385,7 +387,7 @@ var audioPlayer = {
 
 	// Play audio
 	playAudio: function(src, showToast) {
-		showToast = (showToast == 'undefined') ? true : showToast;
+		showToast = (typeof(showToast) == 'undefined') ? true : showToast;
 		if (showToast) {
 			deviceControl.toastMessage('playAudio(' + src + ')');
 		}
@@ -408,7 +410,7 @@ var audioPlayer = {
 			audioPlayer.media.stop();
 		}
 	}
-}
+};
 
 var ttsPlayer = {
 	init: function() {
@@ -429,7 +431,7 @@ var ttsPlayer = {
 			);
 		}
 	}
-}
+};
 
 var wvcApp;
 wvcApp = {
@@ -439,7 +441,7 @@ wvcApp = {
 	initialize:function (callback) {
 		document.addEventListener('deviceready', function () {
 
-			console.log('cordova ready?');
+//			console.log('cordova ready?');
 			wvcApp.onDeviceReady();
 
 			if (callback) {
@@ -511,11 +513,10 @@ wvcApp = {
 		audioPlayer.playAudio('/android_asset/sounds/voice_recognition_error.mp3', false);
 
 		var recDiv = document.createElement('div');
-		recDiv = document.createElement('div');
 		recDiv.setAttribute('id','voiceRecState');
 		recDiv.innerHTML = error.description;
 
-		var recImg = document.getElementById('voiceRecImg')
+		var recImg = document.getElementById('voiceRecImg');
 		recImg.appendChild(recDiv);
 		recImg.setAttribute('class','error');
 
@@ -526,7 +527,6 @@ wvcApp = {
 		audioPlayer.playAudio('/android_asset/sounds/voice_recognition_start.mp3', false);
 
 		var recDiv = document.createElement('div');
-		recDiv = document.createElement('div');
 		recDiv.setAttribute('id','voiceRecOuterWrapper');
 		recDiv.innerHTML = '<div id="voiceRecWrapper"><div id="voiceRecImg"><div id="voiceRecRing"></div></div></div>';
 		document.body.appendChild(recDiv);
@@ -535,7 +535,7 @@ wvcApp = {
 	onVoiceRecognitionResult:function (result) {
 		audioPlayer.playAudio('/android_asset/sounds/voice_recognition_ok.mp3', false);
 
-		var recImg = document.getElementById('voiceRecImg')
+		var recImg = document.getElementById('voiceRecImg');
 		recImg.setAttribute('class','success');
 
 		fhemWVC.informFhem('voiceRecognitionLastResult', result.word);
@@ -554,7 +554,7 @@ wvcApp = {
 
 	// Back key event handler
 	onBackKeyDown:function () {
-		overrideBackKey = false
+		overrideBackKey = false;
 		if (typeof(container.wvcApp.onBackKeyDown) == 'function') {
 			overrideBackKey = container.wvcApp.onBackKeyDown();
 		}
@@ -624,7 +624,8 @@ var fhemWVC = {
 	connect: function () {
 		fhemWVC.currResponseLine = 0;
 		fhemWVC.httpRequest = new XMLHttpRequest();
-		fhemWVC.httpRequest.open("GET", '?inform=1&room=all', true);
+		fhemWVC.httpRequest.open("GET", '?XHR=1&inform=type=status;filter=room=all&timestamp=' + new Date().getTime(), true);
+
 		fhemWVC.httpRequest.onreadystatechange = fhemWVC.parse;
 		fhemWVC.httpRequest.send(null);
 	},
@@ -708,16 +709,21 @@ var fhemWVC = {
 
 		var iconDiv = document.createElement('div');
 		iconDiv.innerHTML = '<div> <div class="onlineIconWrapper"><div id="fhemWVC_onlineIcon" class="onlineIcon"></div></div>';
-		iconDiv.innerHTML+= '<div onClick="fhemWVC.startVoiceRecodnition();" class="batteryIconWrapper"><div id="fhemWVC_batteryIcon" class="batteryIcon bat0"><div id="fhemWVC_acConnectedIcon" class="acConnected"></div><div id="fhemWVC_batteryPercent" class="txtPercent">?%</div></div></div> </div>';
+		iconDiv.innerHTML+= '<div onClick="fhemWVC.startVoiceRecognition();" class="batteryIconWrapper"><div id="fhemWVC_batteryIcon" class="batteryIcon bat0"><div id="fhemWVC_acConnectedIcon" class="acConnected"></div><div id="fhemWVC_batteryPercent" class="txtPercent">?%</div></div></div> </div>';
 		iconDiv.setAttribute('id','htIcons');
 		iconDiv.setAttribute('style','position: fixed; right: 0px; bottom: 0px; width: 32px; height: 80px;');
 
 		document.body.appendChild(iconDiv);
-		},
+	},
 
-	startVoiceRecodnition: function() {
-		cordova.exec(null, null, "VoiceRecognition", "init", []);
+	startVoiceRecognition: function() {
+		cordova.exec(null, fhemWVC.voiceRecognitionNotPresentError, "VoiceRecognition", "init", []);
 		cordova.exec(null, null, "VoiceRecognition", "startRecognition", []);
+	},
+
+	voiceRecognitionNotPresentError: function (errTxt) {
+		deviceControl.toastMessage(errTxt);
+		fhemWVC.informFhem('voiceRecognitionLastError', '-1:' + errTxt);
 	},
 
 	updateBatteryIcon: function(percent, isPlugged) {
@@ -731,7 +737,7 @@ var fhemWVC = {
 	    	acConnectedIcon.className = 'hidden';
 	    }
 
-	    percent = parseInt(percent)
+	    percent = parseInt(percent);
 		percent = (percent > 0 ) ? percent : 0;
 		percent = (percent < 100 ) ? percent : 100;
 
@@ -762,8 +768,8 @@ var fhemWVC = {
     },
 
 	informFhem: function(command, value) {
-		var getVars = '?';
-		getVars+= 'id=' + wvcDevices[fhemWVC.appId];
+		var webViewClientId = (typeof(wvcDevices[fhemWVC.appId]) != 'undefined') ? wvcDevices[fhemWVC.appId] : 'undefined';
+		var getVars = '?id=' + webViewClientId;
 
 		if (command == 'powerState') {
 			getVars+= '&powerLevel=' + fhemWVC.deviceState.powerLevel;
@@ -828,7 +834,7 @@ var fhemWVC = {
 			console.log (dbgObj);
 		}
 	}
-}
+};
 
 //fhemWVC.injectRemoteDebugger();
 fhemWVC.initialize();
@@ -841,4 +847,4 @@ document.addEventListener("DOMContentLoaded", function() {
 	fhemWVC.debug = true;
 	fhemWVC.onBatteryStatus({level: 53, isPlugged: false});
 },false);
- */
+*/
