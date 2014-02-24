@@ -17,7 +17,7 @@ use strict;
 use warnings;
 use URI::Escape;
 
-use vars qw {%data %modules $FW_RET}; #supress errors in Eclipse EPIC
+use vars qw {%data %attr %defs %modules $FW_RET}; #supress errors in Eclipse EPIC
 
 use constant {
 	webViewControl_Version => '0.5_alpha',
@@ -28,10 +28,11 @@ use constant {
 sub webViewControl_Initialize($);		# Initialize
 sub webViewControl_Define($$);			# define <name> WEBVIEWCONTROL
 sub webViewControl_Undef($$);			# delete
-sub webViewControl_modifyJsInclude();	# include js parts
+sub webViewControl_modifyJsInclude($);	# include js parts
 sub webViewControl_Set($@);				# set
 sub webViewControl_Get($@);				# get
 sub webViewControl_Cgi();				# analyze and parse URL
+sub webViewControl_Attr(@);
 
 #########################
 # Global variables
@@ -73,7 +74,9 @@ sub webViewControl_Initialize($) {
 	$hash->{UndefFn}	= 'webViewControl_Undef';
 	$hash->{SetFn}		= 'webViewControl_Set';
 	$hash->{GetFn}		= 'webViewControl_Get';
-	$hash->{AttrList}	= 'loglevel:0,1,2,3,4,5,6 model';
+	$hash->{AttrFn}		= "webViewControl_Attr";
+
+	$hash->{AttrList}	= 'loglevel:0,1,2,3,4,5,6 model userJsFile userCssFile';
 
 	# CGI
 	$data{FWEXT}{$fhemUrl}{FUNC} = 'webViewControl_Cgi';
@@ -98,7 +101,7 @@ sub webViewControl_Define($$) {
 	$hash->{appID} = $a[2];
 	$modules{webViewControl}{defptr}{$name} = $hash;									  
 
-	webViewControl_modifyJsInclude();
+	webViewControl_modifyJsInclude($hash);
 
 	$hash->{VERSION} = webViewControl_Version;
 
@@ -110,20 +113,42 @@ sub webViewControl_Undef($$) {
 	my ($hash, $name) = @_;
   
 	delete($modules{webViewControl}{defptr}{$name});
-	webViewControl_modifyJsInclude();
+	webViewControl_modifyJsInclude($hash);
 
   return undef;
 }
 
-sub webViewControl_modifyJsInclude() {
+sub webViewControl_Attr (@) {
+	my (undef, $name, $attr, $val) =  @_;
+	my $hash = $defs{$name};
+	my $msg = '';
+
+	if ($attr eq 'userJsFile' || $attr eq 'userCssFile') {
+		$attr{$name}{$attr} = $val;
+		webViewControl_modifyJsInclude($hash);
+	}
+
+	return undef;
+}
+
+sub webViewControl_modifyJsInclude($) {
+	my ($hash) = @_;
+	my $name = $hash->{NAME};
+
 	my @appsArray;
 	foreach my $appName (keys %{ $modules{webViewControl}{defptr} } ) {
 		push(@appsArray, '\'' . $modules{webViewControl}{defptr}{$appName}->{appID} . '\': \'' . $appName . '\'');
 	}
 
 	my $vars = 'var wvcDevices = {' . join(', ', @appsArray) . '}';
-	my $userJs = '';
-	
+	my $userJs = AttrVal($name, 'userJsFile', '');
+	$userJs = $userJs ? '<script type="text/javascript" src="/fhem/js/' . $userJs . '"></script>' : '';
+
+	my $userCss = AttrVal($name, 'userCssFile', '');
+	if ($userCss) {
+		$vars.= '; var wvcUserCssFile="' . $userCss . '"';  
+	}
+
 	$data{FWEXT}{$fhemUrl}{SCRIPT} = 'cordova-2.3.0.js"></script>' .
 									 '<script type="text/javascript" src="/fhem/js/webviewcontrol.js"></script>' .
 									 $userJs .

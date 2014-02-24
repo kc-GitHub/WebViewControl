@@ -706,6 +706,10 @@ var fhemWVC = {
 		wvcApp.initialize(function(){
 			fhemWVC.createIcons();
 
+			if (typeof(wvcUserCssFile) != 'undefined') {
+				fhemWVC.injectCss(wvcUserCssFile);
+			}
+
 			fhemWVC.reconnect(50);
 			fhemWVC.setConnectionState(navigator.connection.type);
 
@@ -722,7 +726,7 @@ var fhemWVC = {
 	},
 
 	createIcons: function() {
-		fhemWVC.injectCss();
+		fhemWVC.injectCss('webviewcontrol.css');
 
 		var iconDiv = document.createElement('div');
 		iconDiv.innerHTML = '<div> <div class="onlineIconWrapper"><div id="fhemWVC_onlineIcon" class="onlineIcon"></div></div>';
@@ -770,9 +774,13 @@ var fhemWVC = {
 		batteryIcon.className = 'batteryIcon ' + batClass;
 	},
 
-	injectCss: function() {
+	/**
+	 * Inject given css file
+	 * @param cssFile
+	 */
+	injectCss: function(cssFile) {
 		var css = document.createElement('link');
-		css.setAttribute('href','/fhem/css/webviewcontrol.css');
+		css.setAttribute('href','/fhem/css/' + cssFile);
 		css.setAttribute('rel','stylesheet');
 		document.getElementsByTagName('head')[0].appendChild(css);
 	},
