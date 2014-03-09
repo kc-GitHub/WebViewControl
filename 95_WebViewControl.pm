@@ -20,7 +20,7 @@ use URI::Escape;
 use vars qw {%data %attr %defs %modules $FW_RET}; #supress errors in Eclipse EPIC
 
 use constant {
-	webViewControl_Version => '0.5.1_alpha',
+	webViewControl_Version => '0.5.1_beta',
 };
 
 #########################
