@@ -20,7 +20,7 @@ use URI::Escape;
 use vars qw {%data %attr %defs %modules $FW_RET}; #supress errors in Eclipse EPIC
 
 use constant {
-	webViewControl_Version => '0.5_alpha',
+	webViewControl_Version => '0.5.1_alpha',
 };
 
 #########################
@@ -70,13 +70,14 @@ my $FW_encoding="UTF-8";		 # like in FHEMWEB: encoding hardcoded
 sub webViewControl_Initialize($) {
 	my ($hash) = @_;
 
-	$hash->{DefFn}		= 'webViewControl_Define';
-	$hash->{UndefFn}	= 'webViewControl_Undef';
-	$hash->{SetFn}		= 'webViewControl_Set';
-	$hash->{GetFn}		= 'webViewControl_Get';
-	$hash->{AttrFn}		= "webViewControl_Attr";
+	$hash->{DefFn}    = 'webViewControl_Define';
+	$hash->{UndefFn}  = 'webViewControl_Undef';
+	$hash->{SetFn}    = 'webViewControl_Set';
+	$hash->{GetFn}    = 'webViewControl_Get';
+	$hash->{AttrFn}   = "webViewControl_Attr";
 
-	$hash->{AttrList}	= 'loglevel:0,1,2,3,4,5,6 model userJsFile userCssFile';
+	$hash->{AttrList} = 'loglevel:0,1,2,3,4,5,6 model userJsFile userCssFile '
+	                  . $readingFnAttributes;
 
 	# CGI
 	$data{FWEXT}{$fhemUrl}{FUNC} = 'webViewControl_Cgi';
@@ -219,7 +220,7 @@ sub webViewControl_Set($@) {
 	$hash->{lastCmd} = $v;
 	$hash->{READINGS}{state}{TIME} = TimeNow();
 	$hash->{READINGS}{state}{VAL} = $v;
-   
+
 	return undef;
 }
 
@@ -259,7 +260,7 @@ sub webViewControl_Cgi() {
 		my $name = undef;
 		my %readings = ();
 		my $timeNow		= TimeNow();
-		
+
 		foreach my $pv (split("&", $htmlpart[1])) {		#per each URL-section devided by &
 			$pv =~ s/\+/ /g;
 			$pv =~ s/%(..)/chr(hex($1))/ge;
@@ -270,27 +271,23 @@ sub webViewControl_Cgi() {
 			if ($p eq 'id') {
 				$name = $v;
 			} else {
-				$readings{$p}{TIME} = $timeNow;
-				$readings{$p}{VAL} = $v;
+				$readings{$p} = $v;
 				push(@states, $p . '=' . $v);
 			}
 		}
 
 		if ($modules{webViewControl}{defptr}{$name}) {
 			my $state = join(', ', @states);
-#			$modules{webViewControl}{defptr}{$name}->{CHANGED}[0] = $state;
-			$modules{webViewControl}{defptr}{$name}->{STATE} = $state;
-			$modules{webViewControl}{defptr}{$name}->{READINGS}{state}{VAL} = $state;
-			$modules{webViewControl}{defptr}{$name}->{READINGS}{state}{TIME} = $timeNow;
+			my $hash = $modules{webViewControl}{defptr}{$name};
 
-			my $cc = 0;
+			readingsBeginUpdate($hash);
+			readingsBulkUpdate($hash, "state", $state);
+
 			foreach my $reading (keys %readings) {
-				$modules{webViewControl}{defptr}{$name}->{CHANGED}[$cc] = $reading . ': ' . $readings{$reading}{VAL};
-				$modules{webViewControl}{defptr}{$name}->{READINGS}{$reading} = $readings{$reading};
-				$cc++;
+				readingsBulkUpdate($hash, $reading, $readings{$reading});
 			}
 
-			DoTrigger($name, undef);
+			readingsEndUpdate($hash, 1);
 		}
 	}
 
