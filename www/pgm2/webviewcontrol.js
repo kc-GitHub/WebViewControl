@@ -780,7 +780,7 @@ var fhemWVC = {
 	 */
 	injectCss: function(cssFile) {
 		var css = document.createElement('link');
-		css.setAttribute('href','/fhem/css/' + cssFile);
+		css.setAttribute('href','/fhem/pgm2/' + cssFile);
 		css.setAttribute('rel','stylesheet');
 		document.getElementsByTagName('head')[0].appendChild(css);
 	},
