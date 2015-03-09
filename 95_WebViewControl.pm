@@ -143,7 +143,7 @@ sub webViewControl_modifyJsInclude($) {
 
 	my $vars = 'var wvcDevices = {' . join(', ', @appsArray) . '}';
 	my $userJs = AttrVal($name, 'userJsFile', '');
-	$userJs = $userJs ? '<script type="text/javascript" src="/fhem/js/' . $userJs . '"></script>' : '';
+	$userJs = $userJs ? '<script type="text/javascript" src="/fhem/pgm2/' . $userJs . '"></script>' : '';
 
 	my $userCss = AttrVal($name, 'userCssFile', '');
 	if ($userCss) {
@@ -151,7 +151,7 @@ sub webViewControl_modifyJsInclude($) {
 	}
 
 	$data{FWEXT}{$fhemUrl}{SCRIPT} = 'cordova-2.3.0.js"></script>' .
-									 '<script type="text/javascript" src="/fhem/js/webviewcontrol.js"></script>' .
+									 '<script type="text/javascript" src="/fhem/pgm2/webviewcontrol.js"></script>' .
 									 $userJs .
 									 '<script type="text/javascript">' . $vars . '</script>' .
 									 '<script type="text/javascript" charset="UTF-8';
