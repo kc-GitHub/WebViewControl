@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+	<string name="app_name">WebViewControl</string>
+	<string name="widgetName">WebViewControl Widget</string>
+	
+	<string name="settings_title">Einstellungen</string>
+	
+
+	<string name="dialog_uname">dialog_uname</string>
+	<string name="dialog_submit">Ok</string>
+	<string name="dialog_cancel">Abbrechen</string>
+	
+	
+		<string name="appwidget_prefix_default">Oh hai</string>
+	<string name="appwidget_configure_instructions">This text will be shown before the date in our example widget.</string>
+	<string name="appwidget_text_format">
+		<xliff:g id="prefix">%1$s</xliff:g>: <xliff:g id="time">%2$s</xliff:g>
+	</string>
+
+</resources>

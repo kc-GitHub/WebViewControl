@@ -1,0 +1,23 @@
+WebViewControl Mobile Client (Phonegap)
+==================================
+- Stellt Schnittstelle zum Webinterface her
+
+- Schnittstellen zur Hardware:
+	= Battery Status
+	= Netzwork Status
+	- Hintergrundbeleuchtung
+	- Ausschalten
+	
+- Lokales Einstellungsmenü:
+	x Startadresse für Hauptframe (ggf. getrennt nach Serveradresse / Path?)
+	x Benutzername
+	x Password?
+	x AppID
+	- Lokaler AES Key (Public Key Server?)
+	- Toast für Debugmeldungen anzeigen
+	
+	
+- Internal
+	- Toast für Debugmeldungen
+	- cacheing Prüfen
+	- Überflüssige Menüs entfernen
