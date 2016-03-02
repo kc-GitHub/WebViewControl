@@ -6,13 +6,11 @@ import com.vmd.cordovaPlugins.DeviceControl;
 
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.view.View;
 import android.view.WindowManager;
 import android.webkit.WebSettings;
-import android.widget.Toast;
-//import org.apache.cordova.*;
+import org.apache.cordova.*;
 
-//import android.annotation.SuppressLint;
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 
 public class SettingsManager {
@@ -39,12 +37,6 @@ public class SettingsManager {
 				WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN
 			);
-			
-//			if (currentApiVersion >= android.os.Build.VERSION_CODES.ICE_CREAM_SANDWICH){
-////				Toast.makeText(parentActivity.getApplicationContext(), "currentApiVersion: " + currentApiVersion, Toast.LENGTH_SHORT).show();
-//				// >= API-Level 14
-//				parentActivity.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
-//			}
 		}
 
 		if (preferences.getBoolean("autostart", false)) {
@@ -93,7 +85,11 @@ public class SettingsManager {
 			((ActivityMain) parentActivity).getAppView().getSettings().setDisplayZoomControls(enable);	// disable zoom buttons
 		}
 	}
-
+	
+	
+	
+	
+	
 	public boolean getBoolean(String key, boolean defaultValue) {
 		return preferences.getBoolean(key, defaultValue);
 	}

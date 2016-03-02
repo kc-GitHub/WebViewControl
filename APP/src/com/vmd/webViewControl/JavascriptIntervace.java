@@ -9,6 +9,8 @@ public class JavascriptIntervace {
 	private String mAppId;
 
 	public JavascriptIntervace(DroidGap gap, WebView view, String appId) {
+//		mAppView = view;
+//		mGap = gap;
 		mAppId = appId;
 	}
 

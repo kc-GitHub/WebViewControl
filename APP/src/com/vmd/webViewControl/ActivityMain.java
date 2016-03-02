@@ -1,43 +1,42 @@
 package com.vmd.webViewControl;
 
 import android.app.Activity;
-//import android.app.AlertDialog;
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-//import android.content.DialogInterface;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.Bitmap;
-//import android.graphics.Color;
+import android.graphics.Color;
 import android.net.Uri;
-//import android.opengl.Visibility;
+import android.opengl.Visibility;
 import android.os.BatteryManager;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.util.Log;
-//import android.util.Log;
-//import android.view.Gravity;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-//import android.view.MotionEvent;
-//import android.view.View;
-//import android.view.ViewGroup;
-//import android.view.View;
-//import android.view.ViewGroup.LayoutParams;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
 import android.webkit.WebSettings;
-import android.webkit.WebView;
-//import android.widget.FrameLayout;
-//import android.widget.LinearLayout;
-
-//import android.widget.PopupWindow;
-//import android.widget.TextView;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.apache.cordova.*;
 
 import com.vmd.cordovaPlugins.DeviceControl;
+//import com.vmd.webViewControl.mJpeg.MjpegSample;
+import com.vmd.webViewControl.mJpeg.MjpegInputStream;
+import com.vmd.webViewControl.mJpeg.MjpegView;
+import com.vmd.webViewControl.motionDetection.Preview;
 	
 public class ActivityMain extends DroidGap  {
 
@@ -46,14 +45,12 @@ public class ActivityMain extends DroidGap  {
 	protected String LogTag = "ActivityMain";
 	protected PowerManager powerManager;
 	protected PowerManager.WakeLock wakeLock;
-	protected SettingsManager settingsManager;
-	protected int currentApiVersion = android.os.Build.VERSION.SDK_INT;
-
-	/*
 	protected PopupWindow popUp;
 	private MjpegView mv;
+	protected SettingsManager settingsManager;
+	
 	protected TextView mTextView;
-*/
+
 	private BroadcastReceiver mBroadcastReceiveriver;
 
 	/**
@@ -77,7 +74,8 @@ public class ActivityMain extends DroidGap  {
 		deviceControl = new DeviceControl();
 
 		super.setStringProperty("loadingDialog", "Bitte warten...");
-
+		
+		
 		// TODO: Settings
 		// enable Plugins
 		this.appView.getSettings().setPluginState(WebSettings.PluginState.ON);
@@ -112,7 +110,6 @@ public class ActivityMain extends DroidGap  {
 		jsInterface = new JavascriptIntervace(this, super.appView, settingsManager.getString("appId", "00000"));
 		super.appView.addJavascriptInterface(jsInterface, "appInterface");
 
-/*
 		// catch all touch events
 		super.appView.setOnTouchListener(new View.OnTouchListener() {
 			@Override
@@ -120,6 +117,10 @@ public class ActivityMain extends DroidGap  {
 				boolean retVal = true;
 				// Todo check if device is locked 
 				//retVal = false;
+				
+				
+				
+				
 				
 //				if (v.getId() == R.id.web && event.getAction() == MotionEvent.ACTION_DOWN){
 				if (event.getAction() == MotionEvent.ACTION_DOWN){
@@ -142,6 +143,39 @@ public class ActivityMain extends DroidGap  {
 				
 					AlertDialog alertDialog = builder.create();
 					alertDialog.show();					
+
+/*					
+					// get prompts.xml view
+					LayoutInflater li = getActivity().getLayoutInflater();
+					View promptsView = li.inflate(R.layout.login_dialog, null);
+	 
+					AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
+	 
+					// set prompts.xml to alertdialog builder
+					alertDialogBuilder.setView(promptsView);
+	 
+					// set dialog message
+					alertDialogBuilder
+						.setCancelable(false)
+						.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,int id) {
+								// action on ok
+							}
+						})
+						.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,int id) {
+							dialog.cancel();
+							}
+						});
+	 
+					// create alert dialog
+					AlertDialog alertDialog = alertDialogBuilder.create();
+	 
+					// show it
+					alertDialog.show();					
+*/
+					
+					
 					
 					Log.d(LogTag, alertDialog.toString());
 				}
@@ -149,7 +183,7 @@ public class ActivityMain extends DroidGap  {
 				return retVal;
 			}
 		});
-*/
+
 		
 		loadStartPage();
 	}
@@ -166,48 +200,45 @@ public class ActivityMain extends DroidGap  {
 		String username = settingsManager.getString("username", "");
 		String password = settingsManager.getString("password", "");
 		String startUrl = settingsManager.getString("startUrl", "");
-		String realm    = null;
-		String txtPort;
 		
-		if (("").equals(startUrl.trim())) {
+		if (startUrl.trim() == "") {
 			startUrl = "file:///android_asset/www/index.html";
 		}
 
 		Uri uri = Uri.parse(startUrl);
 		String scheme = uri.getScheme();
-		String host = uri.getHost();
+		String host = host = uri.getHost();
 
+//		startUrl = (scheme != null) ? startUrl : "http://" + startUrl;
+//		uri = Uri.parse(startUrl);
+
+//		Log.d(LogTag, "---------" + scheme + " || " + startUrl);
+		
 		// check if we should send username and password authentication
-		if (!username.equals(("")) || !password.equals((""))) {
+		if (username != "" || password != "") {
 
 			Integer port = uri.getPort();
 			if (port == -1) {
-				port = scheme.equals(("https")) ? 443 : 80;
+				port = (scheme!= null && scheme.equals("https")) ? 443 : 80;
 			}
 
 			if (host != null) {
-				txtPort = ":" + port.toString();					
-				
-				// in Android > 4.3, realm and port must empty string
-				if (currentApiVersion > 18) {
-					realm = "";
-					txtPort = "";
-				}
-				
-				host = uri.getHost() + txtPort;
+				host = uri.getHost() + ":" + port.toString();
+	
+//				Log.d(LogTag, "---------" + host);
 				
 				// token for the authentication
 				AuthenticationToken authToken = new AuthenticationToken();
 				authToken.setUserName(username);
 				authToken.setPassword(password);
 	
-				super.setAuthenticationToken(authToken, host, realm);
+				super.setAuthenticationToken(authToken, host, null);
 			}
 		}
-
+		
 //		Log.d(LogTag, "---------" + startUrl);
 		super.loadUrl(startUrl);
-//		startMotionDetection();
+		startMotionDetection();
 	}
 
 	/**
@@ -217,49 +248,33 @@ public class ActivityMain extends DroidGap  {
 		this.appView.clearCache(true);
 		Toast.makeText(getApplicationContext(), "cache cleared", Toast.LENGTH_SHORT).show();
 	}
-
+	
 	/**
 	 * Display default page on load errors
-	 *
-	 * @param errorCode     the error Code
-	 * @param description   the description
-	 * @param failingUrl    failing URL
+	 * @param errorCode
+	 * @param description
+	 * @param failingUrl
 	 */
-	public void onReceivedError(int errorCode, String description, String failingUrl) {
+	public void onReceivedError( int errorCode, String description, String failingUrl) {
+		Log.d(LogTag, "onReceivedError");
+
 		super.spinnerStop();
 		super.setStringProperty("loadingDialog", null);
 
-		failingUrl = this.appView.getUrl();
-		Log.d(TAG, "failingUrl: " + failingUrl + ", error: " + description + ", errorCode: " + errorCode);
-		
-		this.appView.stopLoading();
-
-		if (this.appView.canGoBack()) {
-			deviceControl.showToast(
-				getActivity(), "Error loading url: " + failingUrl + ", error: " + description, Toast.LENGTH_LONG
-			);
-
-			this.appView.goBack();
-		} else {
-			super.loadUrl(
-				"file:///android_asset/www/index.html?notFound=" + failingUrl + "&descr=" + description + "&errorCode=" + errorCode
-			);		
-		}
+		super.loadUrl(
+			"file:///android_asset/www/index.html?notFound=" + failingUrl + "&descr=" + description + "&errorCode=" + errorCode
+		);
 	}
-	
-	public boolean shouldOverrideUrlLoading(WebView view, String url) {
-		System.out.println("DEMO.shouldOverrideUrlLoading("+url+")");
-		return this.shouldOverrideUrlLoading(view, url);
-	}
-	
 	
 	/**
 	 * Override Back key behavior
 	 */
 	@Override
 	public void onBackPressed() {
-//		popUpDemiss();
+		popUpDemiss();
+		
 		// disable back key
+		return;
 	}
 	
 	/**
@@ -302,12 +317,9 @@ public class ActivityMain extends DroidGap  {
 		
 		// Check ExternalPower connection state
 		if (isExternalPowerConnected(getContext()) && settingsManager.getBoolean("screenKeepOn", false)) {
-			getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-//			deviceControl.setAppFlag(thisActivity, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, true);
-//			deviceControl.showToast(thisActivity, "screenKeepOn true");
+			deviceControl.setAppFlag(thisActivity, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, true);
 		} else {
-			getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-//			deviceControl.setAppFlag(thisActivity, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, false);
+			deviceControl.setAppFlag(thisActivity, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, false);
 		}
 //		Toast.makeText(getContext(), "resume", Toast.LENGTH_SHORT).show();
 	}
@@ -321,7 +333,7 @@ public class ActivityMain extends DroidGap  {
 		
 		// Unregister our BroadcastReceiveriver
 		this.unregisterReceiver(this.mBroadcastReceiveriver);
-//		popUpDemiss();
+		popUpDemiss();
 	}
 
 	/**
@@ -338,8 +350,8 @@ public class ActivityMain extends DroidGap  {
 	
 	/**
 	 * Declaring the Menu options
-	 * @param	menu	the menu
-	 * @return	boolean
+	 * @param menu
+	 * @return
 	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -353,22 +365,22 @@ public class ActivityMain extends DroidGap  {
 	/**
 	 * Handle menu item selection
 	 * 
-	 * @param	item	the menu item
-	 * @return	boolean
+	 * @param item
+	 * @return
 	 */
 	public boolean onOptionsItemSelected(MenuItem item) {
 		DeviceControl deviceControl = new DeviceControl();
 
 		switch(item.getItemId()){
+			case R.id.settings:
+				Intent intent = new Intent(ActivityMain.this, ActivitySettings.class);
+				startActivity(intent);
+				break;
+	
 			case R.id.exit:
 				finish();
 				break;
 	
-		case R.id.settings:
-				Intent intent = new Intent(ActivityMain.this, ActivitySettings.class);
-				startActivity(intent);
-				break;
-		
 			case R.id.reload:
 				Toast.makeText(getApplicationContext(), "Invoke reload", Toast.LENGTH_SHORT).show();
 				loadStartPage();
@@ -393,7 +405,7 @@ public class ActivityMain extends DroidGap  {
 //				startActivity(mJpegView);
 
 //				showPopup();
-//				startMotionDetection();
+				startMotionDetection();
 				break;
 		}
 		
@@ -405,13 +417,14 @@ public class ActivityMain extends DroidGap  {
 		}
 */
 		return true;
+		
 	}
-
+	
 	/**
 	 * Check if external power connected
-	 *
-	 * @param	context	the contxt
-	 * @return	boolean
+	 * 
+	 * @param context
+	 * @return
 	 */
 	public static boolean isExternalPowerConnected(Context context) {
 		Intent intent = context.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
@@ -422,7 +435,7 @@ public class ActivityMain extends DroidGap  {
 	/**
 	 * Show or hide developer menu items
 	 * 
-	 * @param	menu	the menu
+	 * @param menu
 	 */
 	@Override
 	public boolean onPrepareOptionsMenu (Menu menu) {
@@ -438,8 +451,7 @@ public class ActivityMain extends DroidGap  {
 
 		return true;
 	}
-
-/*
+	
 	private void showPopup() {
 		LinearLayout mainLayout = new LinearLayout(this);
 		TextView tv = new TextView(this);
@@ -470,17 +482,15 @@ public class ActivityMain extends DroidGap  {
 		mv.showFps(true);
 //*****************************************************************************
 	}
-*/
 
-/*
 	public interface motionDetectCallback {
 		void motionDetect(int response);
 	}
-
+	
 	private void startMotionDetection() {
 		FrameLayout layout = new FrameLayout(this);
 		this.getAppView().addView(layout, new LayoutParams(1,1));
-		layout.setVisibility(View.VISIBLE);
+		layout.setVisibility(1);
 
 		mTextView = new TextView(this);
 		mTextView.setTextColor(Color.RED);
@@ -498,14 +508,13 @@ public class ActivityMain extends DroidGap  {
 		);
 		layout.addView(preview);
 	}
-
+	
 	private void popUpDemiss() {
 		if(popUp != null) {
 			mv.stopPlayback();
 			popUp.dismiss();
 		}
 	}
-*/
 	
 	public CordovaWebView getAppView() {
 		return this.appView;

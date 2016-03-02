@@ -47,7 +47,6 @@
 
 	</PreferenceCategory>
 
-<!--
 	<PreferenceCategory android:title="Standby verhalten" android:key="category_standby">
 		<CheckBoxPreference
 			android:key="enableNoStandby"
@@ -68,8 +67,7 @@
 			android:defaultValue="0" />
 
 	</PreferenceCategory>
--->
-<!--	
+	
 	<PreferenceCategory android:title="Ereignisse" android:key="category_eventMotion">
 		<CheckBoxPreference
 			android:key="enableWakeupOnTouch"
@@ -90,7 +88,6 @@
 			android:defaultValue="false" />
 
 	</PreferenceCategory>
--->
 	
 	<PreferenceCategory android:title="Ansicht" android:key="category_viewport">
 		<CheckBoxPreference

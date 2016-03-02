@@ -155,18 +155,12 @@ public class DeviceControl extends CordovaPlugin {
 	/**
 	 * show a short toast messages
 	 */
-	public void showToast(Activity ctxActivity, String text, int viewLength) {
+	public void showToast(Activity ctxActivity, String text) {
 		Context context = ctxActivity.getApplicationContext();
 
-		Toast toast = Toast.makeText(context, text, viewLength);
+		Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
 		toast.show();
 	}
 
-	/**
-	 * show a short toast messages
-	 */
-	public void showToast(Activity ctxActivity, String text) {
-		showToast(ctxActivity, text, Toast.LENGTH_SHORT);
-	}
-
+		
 }
