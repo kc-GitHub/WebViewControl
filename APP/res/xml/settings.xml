@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" android:key="screen_main">
+
+	<PreferenceCategory android:title="Allgemein" android:key="category_general">
+		<EditTextPreference
+			android:key="startUrl"
+			android:title="Start URL:"
+			android:summary="URL die beim Starten von WebViewControl aufgerufen werden soll."
+			android:inputType="textUri" />
+
+		<EditTextPreference
+			android:key="appId"
+			android:title="APP-ID:"
+			android:summary="Eindeutige ID zum direkten addresieren meherere Geräte per JavaScript." android:defaultValue="12345"/>
+				
+		<EditTextPreference
+			android:key="username"
+			android:title="Username:"
+			android:summary="Username der beim Start an die Start-URL übergeben werden soll" />
+
+		<EditTextPreference
+			android:key="password"
+			android:title="Password:"
+			android:summary="Passwort das beim Start an die Start-URL übergeben werden soll"
+			android:inputType="textPassword" />
+
+		<CheckBoxPreference
+			android:key="autostart"
+			android:title="Autostart"
+			android:summary="App nach dem Gerätestart automatisch starten"
+			android:defaultValue="false" />
+		
+	</PreferenceCategory>
+
+	<PreferenceCategory android:title="Verhalten" android:key="category_behavior">
+		<CheckBoxPreference
+			android:key="screenKeepOn"
+			android:title="Bildschirm eingeschaltet lassen"
+			android:summary="Bei aktiver App und externer Spannungsversorgung bleibt der Bildschirm eingeschaltet."
+			android:defaultValue="true" />
+
+		<CheckBoxPreference
+			android:key="enableFullscreen"
+			android:title="Fullscreen zulassen"
+			android:summary="Mit Fullscreen wird die IconBar ausgeblendet. (Benötigt einen Restart der App)"
+			android:defaultValue="false" />
+
+	</PreferenceCategory>
+
+<!--
+	<PreferenceCategory android:title="Standby verhalten" android:key="category_standby">
+		<CheckBoxPreference
+			android:key="enableNoStandby"
+			android:title="Standby-Mode verhindern."
+			android:summary="Standby-Mode auch im ausgeschalteten Zustand verhindern. Achtung! Durch diese Funktion verbraucht die App mehr Energie."
+			android:defaultValue="false" />
+
+		<EditTextPreference
+			android:key="inactiveTimeoutExtpower"
+			android:title="Inaktivitäts-Timeout bei externer Stromversorgung"
+			android:summary="Nachdem die App die eingestellte Zeit nicht benutzt wurde, wird der Bildschirm abgeschaltet"
+			android:defaultValue="0" />
+
+		<EditTextPreference
+			android:key="inactiveTimeoutBattery"
+			android:title="Inaktivitäts-Timeout bei Batteriebetrieb"
+			android:summary="Nachdem die App die eingestellte Zeit nicht benutzt wurde, wird der Bildschirm abgeschaltet"
+			android:defaultValue="0" />
+
+	</PreferenceCategory>
+-->
+<!--	
+	<PreferenceCategory android:title="Ereignisse" android:key="category_eventMotion">
+		<CheckBoxPreference
+			android:key="enableWakeupOnTouch"
+			android:title="Aufwachen bei Touch"
+			android:summary="Aktiviert den Bildschirm bei Displayberührung"
+			android:defaultValue="false" />
+
+		<CheckBoxPreference
+			android:key="enableMotionDetection"
+			android:title="Bewegungserkennung über Frontkamera"
+			android:summary="Die Frontkamera ist immer aktiv und 'Überwacht' den Bereich vor dem Gerät. Achtung! Durch diese Funktion verbraucht die App mehr Reccourcen und mehr Energie."
+			android:defaultValue="false" />
+
+		<CheckBoxPreference
+			android:key="enableWakeupMotionDetection"
+			android:title="Aktiviert den Bildschirm bei erkannter Bewegung"
+			android:summary="Mit Fullscreen wird die IconBar ausgeblendet. (Benötigt einen Restart der App)"
+			android:defaultValue="false" />
+
+	</PreferenceCategory>
+-->
+	
+	<PreferenceCategory android:title="Ansicht" android:key="category_viewport">
+		<CheckBoxPreference
+			android:key="enableZoom"
+			android:title="Pinch-Zoom zulassen"
+			android:summary="In der Webview kann per Geste gezoomt werden (Benötigt einen Restart der App)"
+			android:defaultValue="false" />
+
+		<CheckBoxPreference
+			android:key="enableQuickZoom"
+			android:title="Quick-Zoom zulassen"
+			android:summary="In der Webview kann per doppelt tippen gezoomt werden (Benötigt einen Restart der App)"
+			android:defaultValue="false" />
+				
+		<ListPreference  
+			android:key="defaultZoom"
+			android:title="Standart, minimal Zoom "
+			android:summary="Zoomstufe beim Start (Benötigt einen Restart der App)"
+			android:entries="@array/list"
+			android:entryValues="@array/values"
+			android:defaultValue="MEDIUM" />
+
+		<EditTextPreference  
+			android:key="initialZoom"
+			android:title="Initial Zoom "
+			android:summary="Initial Zoom (Benötigt einen Restart der App)"
+			android:defaultValue="0"
+			android:inputType="number"
+			android:maxLength="7" />
+
+	</PreferenceCategory>
+	
+	<PreferenceCategory android:title="Entwickler Einstellungen" android:key="category_developer">
+		<CheckBoxPreference
+			android:key="clearCacheOnStartAndReload"
+			android:title="Cach beim starten und Neuladen löschen"
+			android:summary="Löscht den WEB-Container Cache beim starten und neu laden der App"
+			android:defaultValue="true" />
+
+		<EditTextPreference
+			android:key="loadUrlTimeoutValue"
+			android:title="URL Timeout:"
+			android:summary="Timeout in MS bis eine nicht geladene Seite einen Fehler erzeugt. (Benötigt einen Restart der App)"
+			android:inputType="number"
+			android:defaultValue="20000" />
+
+		<CheckBoxPreference
+			android:key="showDeveloperOptions"
+			android:title="Entwickler-Optionen im Hauptmenü anzeigen"
+			android:defaultValue="true"/>
+
+	</PreferenceCategory>
+
+</PreferenceScreen>
