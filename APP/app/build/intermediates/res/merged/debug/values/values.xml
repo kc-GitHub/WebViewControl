@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
+    <string-array name="list">
+		<item>120dpi</item>
+		<item>160dpi</item>
+		<item>240dpi</item>
+	</string-array>
+    <string-array name="values">
+		<item>CLOSE</item>
+		<item>MEDIUM</item>
+		<item>FAR</item>
+	</string-array>
+    <string name="app_name">WebViewControl</string>
+    <string name="appwidget_configure_instructions">This text will be shown before the date in our example widget.</string>
+    <string name="appwidget_prefix_default">Oh hai</string>
+    <string name="appwidget_text_format">
+		<ns1:g id="prefix">%1$s</ns1:g>: <ns1:g id="time">%2$s</ns1:g>
+	</string>
+    <string name="dialog_cancel">Abbrechen</string>
+    <string name="dialog_submit">Ok</string>
+    <string name="dialog_uname">dialog_uname</string>
+    <string name="settings_title">Einstellungen</string>
+    <string name="widgetName">WebViewControl Widget</string>
+    <style name="WidgetBackground_4_1">
+        <item name="android:background">@drawable/widget_4_1</item>
+    </style>
+    <style name="WidgetText">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+    <style name="WidgetTitle">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+</resources>

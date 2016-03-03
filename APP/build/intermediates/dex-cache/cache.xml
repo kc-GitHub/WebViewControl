@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="E:\Projekte\AndroidEntwicklung\WebViewControl\WebViewControl\app\libs\cordova-2.3.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="e2a118e0ebb9588597c9657cd532cb3b82cbd448">
+        <dex dex="E:\Projekte\AndroidEntwicklung\WebViewControl\WebViewControl\app\build\intermediates\pre-dexed\debug\cordova-2.3.0_6e7546de02df674ed98ba079439e55ccd5e589ae.jar" />
+    </item>
+
+</items>

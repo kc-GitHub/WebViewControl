@@ -1,0 +1,126 @@
+ECLIPSE ANDROID PROJECT IMPORT SUMMARY
+======================================
+
+Ignored Files:
+--------------
+The following files were *not* copied into the new Gradle project; you
+should evaluate whether these are still needed in your project and if
+so manually move them:
+
+* .idea\
+* .idea\.name
+* .idea\codeStyleSettings.xml
+* .idea\compiler.xml
+* .idea\copyright\
+* .idea\copyright\profiles_settings.xml
+* .idea\encodings.xml
+* .idea\inspectionProfiles\
+* .idea\inspectionProfiles\Project_Default.xml
+* .idea\inspectionProfiles\profiles_settings.xml
+* .idea\libraries\
+* .idea\libraries\cordova_2_3_0.xml
+* .idea\libraries\dexedLibs.xml
+* .idea\misc.xml
+* .idea\modules.xml
+* .idea\scopes\
+* .idea\scopes\scope_settings.xml
+* .idea\vcs.xml
+* .idea\workspace.xml
+* Todo.txt
+* WebViewControl.iml
+* WebViewControl_Icon.png
+* WebViewControl_screenshot_01.png
+* WebViewControl_screenshot_02.jpg
+* WebViewControl_screenshot_03.jpg
+* ant.properties
+* out\
+* out\production\
+* out\production\WebViewControl\
+* out\production\WebViewControl\WebViewControl_0.4b.apk
+* out\production\WebViewControl\com\
+* out\production\WebViewControl\com\vmd\
+* out\production\WebViewControl\com\vmd\cordovaPlugins\
+* out\production\WebViewControl\com\vmd\cordovaPlugins\DeviceControl$1.class
+* out\production\WebViewControl\com\vmd\cordovaPlugins\DeviceControl$2.class
+* out\production\WebViewControl\com\vmd\cordovaPlugins\DeviceControl$3.class
+* out\production\WebViewControl\com\vmd\cordovaPlugins\DeviceControl$4.class
+* out\production\WebViewControl\com\vmd\cordovaPlugins\DeviceControl$5.class
+* out\production\WebViewControl\com\vmd\cordovaPlugins\DeviceControl$6.class
+* out\production\WebViewControl\com\vmd\cordovaPlugins\DeviceControl.class
+* out\production\WebViewControl\com\vmd\cordovaPlugins\HeadsetListener$1.class
+* out\production\WebViewControl\com\vmd\cordovaPlugins\HeadsetListener.class
+* out\production\WebViewControl\com\vmd\cordovaPlugins\TTS.class
+* out\production\WebViewControl\com\vmd\cordovaPlugins\VoiceRecognition$1.class
+* out\production\WebViewControl\com\vmd\cordovaPlugins\VoiceRecognition.class
+* out\production\WebViewControl\com\vmd\webViewControl\
+* out\production\WebViewControl\com\vmd\webViewControl\ActivityMain$1.class
+* out\production\WebViewControl\com\vmd\webViewControl\ActivityMain$motionDetectCallback.class
+* out\production\WebViewControl\com\vmd\webViewControl\ActivityMain.class
+* out\production\WebViewControl\com\vmd\webViewControl\ActivitySettings.class
+* out\production\WebViewControl\com\vmd\webViewControl\BuildConfig.class
+* out\production\WebViewControl\com\vmd\webViewControl\JavascriptIntervace.class
+* out\production\WebViewControl\com\vmd\webViewControl\R$array.class
+* out\production\WebViewControl\com\vmd\webViewControl\R$attr.class
+* out\production\WebViewControl\com\vmd\webViewControl\R$dimen.class
+* out\production\WebViewControl\com\vmd\webViewControl\R$drawable.class
+* out\production\WebViewControl\com\vmd\webViewControl\R$id.class
+* out\production\WebViewControl\com\vmd\webViewControl\R$layout.class
+* out\production\WebViewControl\com\vmd\webViewControl\R$menu.class
+* out\production\WebViewControl\com\vmd\webViewControl\R$string.class
+* out\production\WebViewControl\com\vmd\webViewControl\R$style.class
+* out\production\WebViewControl\com\vmd\webViewControl\R$xml.class
+* out\production\WebViewControl\com\vmd\webViewControl\R.class
+* out\production\WebViewControl\com\vmd\webViewControl\ReceiverBootComplete.class
+* out\production\WebViewControl\com\vmd\webViewControl\SettingsManager.class
+* out\production\WebViewControl\com\vmd\webViewControl\ShowPopUp$1.class
+* out\production\WebViewControl\com\vmd\webViewControl\ShowPopUp.class
+* out\production\WebViewControl\com\vmd\webViewControl\Util.class
+* out\production\WebViewControl\com\vmd\webViewControl\Widget\
+* out\production\WebViewControl\com\vmd\webViewControl\Widget\Provider.class
+* out\production\WebViewControl\com\vmd\webViewControl\Widget\Receiver.class
+* out\production\WebViewControl\com\vmd\webViewControl\Widget\Settings$1.class
+* out\production\WebViewControl\com\vmd\webViewControl\Widget\Settings.class
+* out\production\WebViewControl\com\vmd\webViewControl\mJpeg\
+* out\production\WebViewControl\com\vmd\webViewControl\mJpeg\MjpegInputStream.class
+* out\production\WebViewControl\com\vmd\webViewControl\mJpeg\MjpegSample.class
+* out\production\WebViewControl\com\vmd\webViewControl\mJpeg\MjpegView$MjpegViewThread.class
+* out\production\WebViewControl\com\vmd\webViewControl\mJpeg\MjpegView.class
+* out\production\WebViewControl\com\vmd\webViewControl\motionDetection\
+* out\production\WebViewControl\com\vmd\webViewControl\motionDetection\CameraCallback.class
+* out\production\WebViewControl\com\vmd\webViewControl\motionDetection\KeyValue.class
+* out\production\WebViewControl\com\vmd\webViewControl\motionDetection\MotionDetection.class
+* out\production\WebViewControl\com\vmd\webViewControl\motionDetection\Preview.class
+* out\production\WebViewControl\com\vmd\webViewControl\motionDetection\image\
+* out\production\WebViewControl\com\vmd\webViewControl\motionDetection\image\AbstractAndroidImage.class
+* out\production\WebViewControl\com\vmd\webViewControl\motionDetection\image\AndroidImage.class
+* out\production\WebViewControl\com\vmd\webViewControl\motionDetection\image\AndroidImageFactory.class
+* out\production\WebViewControl\com\vmd\webViewControl\motionDetection\image\AndroidImage_NV21.class
+* out\production\WebViewControl\com\vmd\webViewControl\motionDetection\image\Size.class
+* proguard-project.txt
+
+Moved Files:
+------------
+Android Gradle projects use a different directory structure than ADT
+Eclipse projects. Here's how the projects were restructured:
+
+* AndroidManifest.xml => app\src\main\AndroidManifest.xml
+* assets\ => app\src\main\assets\
+* libs\cordova-2.3.0.jar => app\libs\cordova-2.3.0.jar
+* lint.xml => app\lint.xml
+* res\ => app\src\main\res\
+* src\ => app\src\main\java\
+
+Next Steps:
+-----------
+You can now build the project. The Gradle project needs network
+connectivity to download dependencies.
+
+Bugs:
+-----
+If for some reason your project does not build, and you determine that
+it is due to a bug or limitation of the Eclipse to Gradle importer,
+please file a bug at http://b.android.com with category
+Component-Tools.
+
+(This import summary is for your information only, and can be deleted
+after import once you are satisfied with the results.)

@@ -1,0 +1,22 @@
+[
+    {
+        "merged": "E:\\Projekte\\AndroidEntwicklung\\WebViewControl\\WebViewControl\\app\\build\\intermediates\\res\\merged\\debug\\layout\\login_dialog.xml",
+        "source": "E:\\Projekte\\AndroidEntwicklung\\WebViewControl\\WebViewControl\\app\\src\\main\\res\\layout\\login_dialog.xml"
+    },
+    {
+        "merged": "E:\\Projekte\\AndroidEntwicklung\\WebViewControl\\WebViewControl\\app\\build\\intermediates\\res\\merged\\debug\\layout\\test.xml",
+        "source": "E:\\Projekte\\AndroidEntwicklung\\WebViewControl\\WebViewControl\\app\\src\\main\\res\\layout\\test.xml"
+    },
+    {
+        "merged": "E:\\Projekte\\AndroidEntwicklung\\WebViewControl\\WebViewControl\\app\\build\\intermediates\\res\\merged\\debug\\layout\\widget_settings.xml",
+        "source": "E:\\Projekte\\AndroidEntwicklung\\WebViewControl\\WebViewControl\\app\\src\\main\\res\\layout\\widget_settings.xml"
+    },
+    {
+        "merged": "E:\\Projekte\\AndroidEntwicklung\\WebViewControl\\WebViewControl\\app\\build\\intermediates\\res\\merged\\debug\\layout\\widget_layout.xml",
+        "source": "E:\\Projekte\\AndroidEntwicklung\\WebViewControl\\WebViewControl\\app\\src\\main\\res\\layout\\widget_layout.xml"
+    },
+    {
+        "merged": "E:\\Projekte\\AndroidEntwicklung\\WebViewControl\\WebViewControl\\app\\build\\intermediates\\res\\merged\\debug\\layout\\main.xml",
+        "source": "E:\\Projekte\\AndroidEntwicklung\\WebViewControl\\WebViewControl\\app\\src\\main\\res\\layout\\main.xml"
+    }
+]

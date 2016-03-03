@@ -1,0 +1,38 @@
+[
+    {
+        "merged": "E:\\Projekte\\AndroidEntwicklung\\WebViewControl\\WebViewControl\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\widget_preview.png",
+        "source": "E:\\Projekte\\AndroidEntwicklung\\WebViewControl\\WebViewControl\\app\\src\\main\\res\\drawable\\widget_preview.png"
+    },
+    {
+        "merged": "E:\\Projekte\\AndroidEntwicklung\\WebViewControl\\WebViewControl\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\widget_4_1.png",
+        "source": "E:\\Projekte\\AndroidEntwicklung\\WebViewControl\\WebViewControl\\app\\src\\main\\res\\drawable\\widget_4_1.png"
+    },
+    {
+        "merged": "E:\\Projekte\\AndroidEntwicklung\\WebViewControl\\WebViewControl\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\icon.png",
+        "source": "E:\\Projekte\\AndroidEntwicklung\\WebViewControl\\WebViewControl\\app\\src\\main\\res\\drawable\\icon.png"
+    },
+    {
+        "merged": "E:\\Projekte\\AndroidEntwicklung\\WebViewControl\\WebViewControl\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\corners.xml",
+        "source": "E:\\Projekte\\AndroidEntwicklung\\WebViewControl\\WebViewControl\\app\\src\\main\\res\\drawable\\corners.xml"
+    },
+    {
+        "merged": "E:\\Projekte\\AndroidEntwicklung\\WebViewControl\\WebViewControl\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\widget_background.png",
+        "source": "E:\\Projekte\\AndroidEntwicklung\\WebViewControl\\WebViewControl\\app\\src\\main\\res\\drawable\\widget_background.png"
+    },
+    {
+        "merged": "E:\\Projekte\\AndroidEntwicklung\\WebViewControl\\WebViewControl\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_menu_settings.png",
+        "source": "E:\\Projekte\\AndroidEntwicklung\\WebViewControl\\WebViewControl\\app\\src\\main\\res\\drawable\\ic_menu_settings.png"
+    },
+    {
+        "merged": "E:\\Projekte\\AndroidEntwicklung\\WebViewControl\\WebViewControl\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_menu_exit.png",
+        "source": "E:\\Projekte\\AndroidEntwicklung\\WebViewControl\\WebViewControl\\app\\src\\main\\res\\drawable\\ic_menu_exit.png"
+    },
+    {
+        "merged": "E:\\Projekte\\AndroidEntwicklung\\WebViewControl\\WebViewControl\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_menu_info_about.png",
+        "source": "E:\\Projekte\\AndroidEntwicklung\\WebViewControl\\WebViewControl\\app\\src\\main\\res\\drawable\\ic_menu_info_about.png"
+    },
+    {
+        "merged": "E:\\Projekte\\AndroidEntwicklung\\WebViewControl\\WebViewControl\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\widget_2_2.png",
+        "source": "E:\\Projekte\\AndroidEntwicklung\\WebViewControl\\WebViewControl\\app\\src\\main\\res\\drawable\\widget_2_2.png"
+    }
+]

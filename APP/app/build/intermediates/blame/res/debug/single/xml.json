@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "E:\\Projekte\\AndroidEntwicklung\\WebViewControl\\WebViewControl\\app\\build\\intermediates\\res\\merged\\debug\\xml\\settings.xml",
+        "source": "E:\\Projekte\\AndroidEntwicklung\\WebViewControl\\WebViewControl\\app\\src\\main\\res\\xml\\settings.xml"
+    },
+    {
+        "merged": "E:\\Projekte\\AndroidEntwicklung\\WebViewControl\\WebViewControl\\app\\build\\intermediates\\res\\merged\\debug\\xml\\widget_info.xml",
+        "source": "E:\\Projekte\\AndroidEntwicklung\\WebViewControl\\WebViewControl\\app\\src\\main\\res\\xml\\widget_info.xml"
+    },
+    {
+        "merged": "E:\\Projekte\\AndroidEntwicklung\\WebViewControl\\WebViewControl\\app\\build\\intermediates\\res\\merged\\debug\\xml\\config.xml",
+        "source": "E:\\Projekte\\AndroidEntwicklung\\WebViewControl\\WebViewControl\\app\\src\\main\\res\\xml\\config.xml"
+    }
+]

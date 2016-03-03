@@ -1,0 +1,26 @@
+[
+    {
+        "outputFile": "E:\\Projekte\\AndroidEntwicklung\\WebViewControl\\WebViewControl\\app\\build\\intermediates\\res\\merged\\debug\\values-v14\\values-v14.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 43,
+                    "endOffset": 94
+                },
+                "from": {
+                    "file": "E:\\Projekte\\AndroidEntwicklung\\WebViewControl\\WebViewControl\\app\\src\\main\\res\\values-v14\\dimens.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 1,
+                        "startOffset": 52,
+                        "endColumn": 40,
+                        "endOffset": 91
+                    }
+                }
+            }
+        ]
+    }
+]
